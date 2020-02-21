@@ -1,9 +1,9 @@
 package com.carpetaciudadana.app.config;
 
-import com.carpetaciudadana.app.security.*;
-import com.carpetaciudadana.app.security.jwt.*;
+import com.carpetaciudadana.app.security.AuthoritiesConstants;
+import com.carpetaciudadana.app.security.jwt.JWTConfigurer;
+import com.carpetaciudadana.app.security.jwt.TokenProvider;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
