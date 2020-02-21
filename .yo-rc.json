@@ -1,0 +1,37 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "com.carpetaciudadana.app"
+    },
+    "jhipsterVersion": "6.5.0",
+    "applicationType": "gateway",
+    "baseName": "carpetaExcel",
+    "packageName": "com.carpetaciudadana.app",
+    "packageFolder": "com/carpetaciudadana/app",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "no",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "no",
+    "devDatabaseType": "no",
+    "prodDatabaseType": "no",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "OTVjMjUxNzVmN2NiOGU0MTVmZTA4YTJiMzY0NjA5MWZlMjUxOTMwYTRkYzVkN2U1YWYyZDExNzA4ZWQwYjNlZmFiYzAzZmY1Y2QzNjhlOTJhYzQ3YzM2NmM3NTcyYmU0NDUyYTkyODIwZWZkOWY5MWVjNjY1Y2M4MDgxZDQ4YWQ=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": false,
+    "blueprints": []
+  }
+}
