@@ -1,12 +1,14 @@
 package com.carpetaciudadana.app.service.impl;
 
 import java.io.IOException;
-import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.carpetaciudadana.app.service.ExcelService;
+import com.carpetaciudadana.app.service.dto.DocumentoDTO;
+import com.carpetaciudadana.app.service.util.Funciones;
+import com.fasterxml.jackson.core.JsonProcessingException;
 
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
@@ -17,47 +19,38 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class ExcelServiceImpl implements ExcelService {
 
-    private final Logger log = LoggerFactory.getLogger(ExcelServiceImpl.class);
+	private final Logger log = LoggerFactory.getLogger(ExcelServiceImpl.class);
 
-
-    
-    /**
-     * Obtiene la informacion de un excel
-     * @param files Archivo Excel
-     * @return {@link String}
-     * @throws IOException
-     * @throws DocumentException
-     */
-	public List<Object> excelProcess(MultipartFile files) throws IOException{
+	/**
+	 * Obtiene la informacion de un excel
+	 * 
+	 * @param files Archivo Excel
+	 * @return {@link String}
+	 * @throws IOException
+	 * @throws DocumentException
+	 */
+	public List<DocumentoDTO> excelProcess(MultipartFile files) throws IOException {
 		log.info("excelProcess");
 		XSSFWorkbook book = new XSSFWorkbook(files.getInputStream());
-		book.close();
-		log.info("book");
-		book.forEach( e -> {
-			System.out.println("=> " + e.getSheetName());
-		});
-		//String fecha = "mm\-dd\-yyyy";
 		XSSFSheet b_sheet = book.getSheetAt(0);
+		List<DocumentoDTO> lDto = new ArrayList<DocumentoDTO>();
 		b_sheet.forEach(a -> {
-			if(a.getRowNum() != 0){
+			if (a.getRowNum() != 0) {
+				String[] preDto = new String[9];
 				a.forEach(action -> {
-					//System.out.println("=> " + action.getCellType());
-					System.out.println("Style " + action.getCellType());
-					if(action.getCellType().toString().equals("NUMERIC") ){
-						if(DateUtil.isCellDateFormatted(action)){
-							System.out.println("Date " +  DateFormat.getDateInstance(DateFormat.SHORT).format(action.getDateCellValue()));
-						}else{
-							System.out.println("Numeric " +action.getNumericCellValue());
-						}
-					}else{
-						System.out.println("String " +action.getRichStringCellValue());
-					}
+					//log.info(Funciones.obtenerDato(action));
+					preDto[action.getColumnIndex()] = Funciones.obtenerDato(action);
 				});
+				try {
+					lDto.add(Funciones.sombreroSeleccionador(preDto));
+				} catch (JsonProcessingException e1) {
+					log.error("No se pudo procesar fila " + a.getRowNum() +"columna ");
+				}
+				System.out.println("ROW " +a.getRowNum() );
 			}
 		});
-
-
-		return null;
+		book.close();
+		return lDto;
 	}
 
 

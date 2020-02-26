@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.util.List;
 
 import com.carpetaciudadana.app.service.ExcelService;
+import com.carpetaciudadana.app.service.dto.DocumentoDTO;
 
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -37,10 +39,10 @@ public class ExcelResource {
      */
     @ApiOperation(value = "Produce un documento pdf a partir de una lista de documentos pdf", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping(value = "/file/excel/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public List<Object> getExcelToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files) throws IOException{
+    public ResponseEntity<List<DocumentoDTO>> getExcelToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files) throws IOException{
         log.debug("Entro en getExcelToData POST /file/excel/");
         if (!files.isEmpty()){
-            return excelService.excelProcess(files);
+            return ResponseEntity.accepted().body(excelService.excelProcess(files));
         }else{
             //throw new CustomParameterizedException("No se encuentra aliniacion");
             log.error("rompio");
