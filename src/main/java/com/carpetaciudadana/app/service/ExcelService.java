@@ -1,7 +1,9 @@
 package com.carpetaciudadana.app.service;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.carpetaciudadana.app.service.dto.DocumentoDTO;
 
@@ -15,6 +17,6 @@ public interface ExcelService {
      * @throws IOException
      * @throws DocumentException
      */
-	public List<DocumentoDTO> excelProcess(MultipartFile files) throws IOException;
+	public Map<String, Object> excelProcess(MultipartFile files) throws IOException;
 	
 }

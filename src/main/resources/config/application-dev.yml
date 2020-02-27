@@ -15,9 +15,11 @@
 
 logging:
   level:
-    ROOT: DEBUG
-    io.github.jhipster: DEBUG
-    com.carpetaciudadana.app: DEBUG
+    ROOT: WARN
+    io.github.jhipster: WARN
+    com.carpetaciudadana.app: WARN
+
+    
 log4j:
     rootLogger : WARN
 spring:

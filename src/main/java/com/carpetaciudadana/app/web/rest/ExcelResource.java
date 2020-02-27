@@ -2,6 +2,7 @@ package com.carpetaciudadana.app.web.rest;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import com.carpetaciudadana.app.service.ExcelService;
 import com.carpetaciudadana.app.service.dto.DocumentoDTO;
@@ -39,7 +40,7 @@ public class ExcelResource {
      */
     @ApiOperation(value = "Produce un documento pdf a partir de una lista de documentos pdf", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping(value = "/file/excel/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<List<DocumentoDTO>> getExcelToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files) throws IOException{
+    public ResponseEntity<Map<String, Object>> getExcelToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files) throws IOException{
         log.debug("Entro en getExcelToData POST /file/excel/");
         if (!files.isEmpty()){
             return ResponseEntity.accepted().body(excelService.excelProcess(files));
