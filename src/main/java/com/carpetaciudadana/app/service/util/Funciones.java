@@ -80,11 +80,11 @@ public class Funciones {
             ccd.setNombre(dato[3]);
             ccd.setEmail(dato[8]); 
             temp.informacion(ccd);  
-            try {
-                temp.setFechaNacimiento(LocalDate.parse(dato[7]));
-            } catch (Exception e) {
-                throw new Exception("no se pudo procesar Fecha '"+ dato[7] + "'" );
-            }
+            // try {
+            //     temp.setFechaNacimiento(LocalDate.parse(dato[7]));
+            // } catch (Exception e) {
+            //     throw new Exception("no se pudo procesar Fecha '"+ dato[7] + "'" );
+            // }
             
         }else if (tipo.equals("CERTIFICADO_CEDEL")) {
             EstudianteCedel cedel = new EstudianteCedel();

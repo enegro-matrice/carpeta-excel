@@ -1,6 +1,7 @@
 package com.carpetaciudadana.app.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,6 +21,5 @@ public interface ExcelService {
     public Map<String, Object> excelProcess(MultipartFile files, String tipo) throws IOException;
     
 
-    public List<Map<String, Object>> csvProcess(MultipartFile files) throws IOException, ArrayIndexOutOfBoundsException, NullPointerException;
-	
+    public Map<String, Object> csvProcess(MultipartFile files, String tipo) throws Exception, ArrayIndexOutOfBoundsException, NullPointerException; 
 }
