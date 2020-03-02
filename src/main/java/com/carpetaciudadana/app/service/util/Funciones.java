@@ -1,18 +1,11 @@
 package com.carpetaciudadana.app.service.util;
 
-import java.io.EOFException;
-import java.io.IOException;
 import java.text.DateFormat;
-import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import com.carpetaciudadana.app.domain.Ccd;
 import com.carpetaciudadana.app.domain.EstudianteCedel;
 import com.carpetaciudadana.app.service.dto.DocumentoDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -22,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 public class Funciones {
 
-    private static final ObjectMapper mapper = new ObjectMapper();
     private final static Logger log = LoggerFactory.getLogger(Funciones.class);
 
     public static String obtenerDato(Cell celda) throws Exception {

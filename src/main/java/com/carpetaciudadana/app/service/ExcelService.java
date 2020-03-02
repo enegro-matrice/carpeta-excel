@@ -1,12 +1,7 @@
 package com.carpetaciudadana.app.service;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import com.carpetaciudadana.app.service.dto.DocumentoDTO;
 
 import org.springframework.web.multipart.MultipartFile;
 
