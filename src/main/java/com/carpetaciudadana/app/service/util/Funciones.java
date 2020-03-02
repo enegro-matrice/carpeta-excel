@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.carpetaciudadana.app.domain.Ccd;
+import com.carpetaciudadana.app.domain.EstudianteCedel;
 import com.carpetaciudadana.app.service.dto.DocumentoDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -56,52 +57,47 @@ public class Funciones {
         return dato;
     }
 
-    public static DocumentoDTO sombreroSeleccionador(String[] dato) throws Exception, JsonProcessingException,NullPointerException {
+    public static DocumentoDTO sombreroSeleccionador(String[] dato, String tipo) throws Exception, JsonProcessingException,NullPointerException {
         int index = 0;
-        DocumentoDTO temp = new DocumentoDTO();
-        Ccd ccd = new Ccd();
         for (String string : dato) {
             try {
+                index++;
                 checkNull(string);
             } catch (NullPointerException e) {
                 throw new NullPointerException("Dato vacio " + index);
-            }
-            switch (index) {
-                case 1:
-                    ccd.setEspecialidad(string);
-                    break;
-                case 2:
-                    ccd.setApellido(string);
-                    break;
-                case 3:
-                    ccd.setNombre(string);
-                    break;
-                case 4:
-                    temp.setTipoDocumento(string);                 
-                    break;
-                case 5:
-                    temp.setNumeroDocumento(string);                   
-                    break;
-                case 6:
-                    temp.setNacionalidadDocumento(string);                 
-                    break;
-                case 7:
-                try {
-                    temp.setFechaNacimiento(LocalDate.parse(string));
-                } catch (Exception e) {
-                    throw new Exception("no se pudo procesar Fecha '"+ string + "'" );
-                }
-                    break;
-                case 8:  
-                    ccd.setEmail(string);                               
-                    break;
-            }
-                index++;
-
-           
+            }          
         }
-        temp.setTipoInformacion("CERTIFICADO_CMD");
-        temp.informacion(ccd);
+        DocumentoDTO temp = new DocumentoDTO();
+        if(tipo.equals("CERTIFICADO_CMD")){
+
+            temp.setTipoDocumento(dato[4]); 
+            temp.setNumeroDocumento(dato[5]); 
+            temp.setNacionalidadDocumento(dato[6]); 
+            Ccd ccd = new Ccd();
+
+            ccd.setEspecialidad(dato[1]);
+            ccd.setApellido(dato[2]);
+            ccd.setNombre(dato[3]);
+            ccd.setEmail(dato[8]); 
+            temp.informacion(ccd);  
+            try {
+                temp.setFechaNacimiento(LocalDate.parse(dato[7]));
+            } catch (Exception e) {
+                throw new Exception("no se pudo procesar Fecha '"+ dato[7] + "'" );
+            }
+            
+        }else if (tipo.equals("CERTIFICADO_CEDEL")) {
+            EstudianteCedel cedel = new EstudianteCedel();
+            cedel.apellido(dato[2]);
+            cedel.nombre(dato[1]);
+            cedel.dni(dato[0]);
+            cedel.curso(dato[3]);
+            cedel.fechaFin(dato[4]);
+            temp.informacion(cedel);
+        }else{
+            throw new Exception("Tipo inconrrecto" );
+        }
+        temp.setTipoInformacion(tipo);
         return temp;
     }
 

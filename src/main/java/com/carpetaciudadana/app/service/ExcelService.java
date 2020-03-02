@@ -17,6 +17,9 @@ public interface ExcelService {
      * @throws IOException
      * @throws DocumentException
      */
-	public Map<String, Object> excelProcess(MultipartFile files) throws IOException;
+    public Map<String, Object> excelProcess(MultipartFile files, String tipo) throws IOException;
+    
+
+    public List<Map<String, Object>> csvProcess(MultipartFile files) throws IOException, ArrayIndexOutOfBoundsException, NullPointerException;
 	
 }

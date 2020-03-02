@@ -40,10 +40,11 @@ public class ExcelResource {
      */
     @ApiOperation(value = "Produce un documento pdf a partir de una lista de documentos pdf", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping(value = "/file/excel/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<Map<String, Object>> getExcelToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files) throws IOException{
+    public ResponseEntity<Map<String, Object>> getExcelToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files,
+                                                              @RequestParam (value = "tipo",required = true) String tipo) throws IOException{
         log.debug("Entro en getExcelToData POST /file/excel/");
         if (!files.isEmpty()){
-            return ResponseEntity.accepted().body(excelService.excelProcess(files));
+            return ResponseEntity.accepted().body(excelService.excelProcess(files, tipo));
         }else{
             //throw new CustomParameterizedException("No se encuentra aliniacion");
             log.error("rompio");
@@ -52,4 +53,23 @@ public class ExcelResource {
     }
 
 
+        /**
+     * Obtiene la informacion de un csv
+     * @param files Archivo csv
+     * @return {@link String}
+     * @throws IOException
+     * @throws DocumentException
+     */
+    @ApiOperation(value = "Produce un documento pdf a partir de una lista de documentos pdf", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/file/csv/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<List<Map<String, Object>>> getCsvToData(@RequestParam (value = "files", required = true ) @ApiParam(value = "files") final MultipartFile files) throws IOException{
+        log.debug("Entro en getExcelToData POST /file/excel/");
+        if (!files.isEmpty()){
+            return ResponseEntity.accepted().body(excelService.csvProcess(files));
+        }else{
+            //throw new CustomParameterizedException("No se encuentra aliniacion");
+            log.error("rompio");
+        }
+        return null;
+    }
 }

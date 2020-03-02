@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.carpetaciudadana.app.domain.Documento.Informacion;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,7 +12,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 
 @JsonTypeName("CERTIFICADO_CMD")
-public class Ccd implements Serializable {
+public class Ccd extends Informacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
 	private final static ObjectMapper mapper = new ObjectMapper();
