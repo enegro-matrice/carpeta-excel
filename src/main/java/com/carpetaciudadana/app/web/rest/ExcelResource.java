@@ -33,13 +33,12 @@ public class ExcelResource {
      * Obtiene la informacion de un excel o csv
      * 
      * @param files Archivo Excel o csv
-     * @return {@link String}
+     * @return {@link ResponseEntity}
      * @throws Exception
      * @throws NullPointerException
      * @throws ArrayIndexOutOfBoundsException
      * @throws DocumentException
      */
-    @ApiOperation(value = "Produce un documento pdf a partir de una lista de documentos pdf", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     @PostMapping(value = "/file/excel/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<Map<String, Object>> getExcelToData(
             @RequestParam(value = "files", required = true) @ApiParam(value = "files") final MultipartFile files,

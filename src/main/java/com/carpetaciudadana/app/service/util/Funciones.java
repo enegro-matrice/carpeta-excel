@@ -17,6 +17,12 @@ public class Funciones {
 
     private final static Logger log = LoggerFactory.getLogger(Funciones.class);
 
+    /**
+     * Procesa la informacion que trae el excel para separarla dependiendo del formato.
+     * @param celda {@link Cell}
+     * @return
+     * @throws Exception
+     */
     public static String obtenerDato(Cell celda) throws Exception {
         String dato = "";
         if (celda.getCellType().toString().equals("NUMERIC")) {
@@ -48,7 +54,15 @@ public class Funciones {
         }
         return dato;
     }
-
+    /**
+     * Esta funcion genera un documentoDTO apatir de los datos que llegan en "dato" 
+     * @param dato String[] que contiene los datos ordenados adecuado al excel pre generado.
+     * @param tipo String que contiene el tipo de archivo el cual se desea generar.
+     * @return {@link DocumentoDTO} 
+     * @throws Exception
+     * @throws JsonProcessingException
+     * @throws NullPointerException
+     */
     public static DocumentoDTO sombreroSeleccionador(String[] dato, String tipo) throws Exception, JsonProcessingException,NullPointerException {
         int index = 0;
         for (String string : dato) {
@@ -77,7 +91,6 @@ public class Funciones {
             // } catch (Exception e) {
             //     throw new Exception("no se pudo procesar Fecha '"+ dato[7] + "'" );
             // }
-            
         }else if (tipo.equals("CERTIFICADO_CEDEL")) {
             EstudianteCedel cedel = new EstudianteCedel();
             cedel.apellido(dato[2]);
@@ -92,11 +105,13 @@ public class Funciones {
         temp.setTipoInformacion(tipo);
         return temp;
     }
-
+    /**
+     * Verifica si el dato esta vacio
+     * acciona {@link NullPointerException}
+     * @param dato
+     */
     public static void checkNull(String dato){
         dato.getBytes();
     }
-//Ccd ccd = new Ccd().nombre("Maximiliano").apellido("Pizarro").escuelaTecnica("Albert thomas").email("asdf").especialidad("electronica");
-//document.cuil("2336771843").fechaNacimiento(LocalDate.parse("2019-05-05")).tipoDocumento("DNI").nacionalidadDocumento("ARG").numeroDocumento("36771843").tipoInformacion("CERTIFICADO_CMD").informacion(ccd);
 }
 
