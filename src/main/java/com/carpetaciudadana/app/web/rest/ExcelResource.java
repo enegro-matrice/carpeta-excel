@@ -50,10 +50,12 @@ public class ExcelResource {
             }else if(FilenameUtils.getExtension(files.getOriginalFilename()).equals("csv")){
                 return ResponseEntity.accepted().body(excelService.csvProcess(files,tipo));
             }
-
         }else{
-            log.error("rompio");
+            throw new Exception("El archivo no fue cargado");
+            
         }
-        return null;
+        throw new Exception("No se a podido procesar");
+
+
     }
 }
